@@ -12,7 +12,7 @@ let matched = 0;
 const total = 8;
 deck.addEventListener('click', event => {
     const clickTarget = event.target;
-    if(clickTarget.classList.contains('card') && cards.length < 2 && !clickTarget.classList.contains('match')){
+    if(clickTarget.classList.contains('card') && cards.length < 2 && !clickTarget.classList.contains('match') && !cards.includes(clickTarget)){
         toggleCard(clickTarget);
         addCard(clickTarget);
         if(clock) {
@@ -143,6 +143,8 @@ document.querySelector('.popup-cancel').addEventListener('click', togglePopup);
 document.querySelector('.popup-replay').addEventListener('click', replayGame);
 //When game finishes
 function gameOver() {
+    matched = 0;
+    cards = [];
     stopClock();
     togglePopup();
     writePopup();
@@ -169,6 +171,8 @@ function restartGame() {
     clockOff = true;
     time = 0;
     matched = 0;
+    cards = [];
+    moves = 0;
     displayTime();
     resetMoves();
     resetStars();
